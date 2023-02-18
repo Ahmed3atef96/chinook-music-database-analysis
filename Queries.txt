@@ -1,0 +1,38 @@
+/* Query 1 */
+SELECT g.name AS GenreName,
+      count(t.albumid) AS NoOfAlbums
+FROM genre g
+JOIN track t 
+ON g.Genreid= t.Genreid
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+
+/* Query 2 */
+SELECT g.name AS Name,
+       SUM(il.UnitPrice*Quantity) AS TotalSales
+FROM Genre g
+JOIN Track t ON t.GenreId = g.GenreId
+JOIN InvoiceLine il ON t.TrackId = il.TrackId
+GROUP BY 1
+ORDER BY 2 DESC;
+
+/* Query 3 */
+SELECT a.Title AS AlbumName, 
+       sum(il.UnitPrice*Quantity) AS TotalIncome
+FROM Album a
+JOIN Track t ON T.AlbumId = a.AlbumId
+JOIN InvoiceLine il ON t.TrackId = il.TrackId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 5;
+
+/* Query 4 */
+SELECT c.Country,
+       sum(i.total) AS TotalSpent
+FROM Customer c
+JOIN Invoice i ON i.CustomerId = c.CustomerId
+WHERE i.InvoiceDate BETWEEN "2011-01-01" AND "2012-01-01"
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
